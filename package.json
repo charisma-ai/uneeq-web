@@ -1,0 +1,64 @@
+{
+  "name": "@charisma-ai/uneeq-web",
+  "version": "0.0.0",
+  "description": "Web client for the Uneeq project",
+  "repository": "https://github.com/charisma-ai/uneeq-web",
+  "author": "Charisma Entertainment Ltd <hello@charisma.ai>",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint --fix --ext js,ts,tsx .",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "@charisma-ai/react": "^3.3.0",
+    "@charisma-ai/sdk": "^3.5.0",
+    "@mdx-js/loader": "^2.1.2",
+    "@next/bundle-analyzer": "^12.1.6",
+    "@next/mdx": "^12.1.6",
+    "@speechly/react-client": "^2.1.2",
+    "classnames": "^2.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "next": "^12.1.6",
+    "next-seo": "^5.4.0",
+    "normalize.css": "^8.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.4.0",
+    "uneeq-js": "^2.40.0"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.4.3",
+    "@types/eslint-plugin-prettier": "^3.1.0",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/node": "^17.0.34",
+    "@types/prettier": "^2.6.3",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "eslint": "^8.18.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.2",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  },
+  "engines": {
+    "node": ">=16.x"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
