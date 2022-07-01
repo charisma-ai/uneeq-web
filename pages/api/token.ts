@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   // Environment variables loaded in from .env
   const uneeqUri = process.env.UNEEQ_URI as string;
-  const uneeqWorkspace = process.env.UNEEQ_WORKSPACE as string;
+  const uneeqWorkspace = process.env.NEXT_PUBLIC_UNEEQ_ID as string;
   const uneeqSecret = process.env.UNEEQ_SECRET as string;
 
   // The custom data to be associated with the session and available when asking a question to conversation service
