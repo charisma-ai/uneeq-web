@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { DecoderState, useSpeechContext } from "@speechly/react-client";
+import { ClientState, useSpeechContext } from "@speechly/react-client";
 import classNames from "classnames";
 import {
   Conversation,
@@ -18,6 +18,9 @@ const API_KEY = "42ce9f0c-9039-41cf-a9b8-5f03d9a49087";
 const Player = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUneeqLoaded, setIsUneeqLoaded] = useState(false);
+
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
   const avatarVideoContainerElement = useRef<HTMLDivElement>(null);
   const localVideoContainerElement = useRef<HTMLDivElement>(null);
@@ -51,19 +54,25 @@ const Player = () => {
       output: "url",
     });
     newConversation.on("message", (message) => {
+      console.log("CHARISMA MESSAGE:");
       console.log(message);
       if (message.type === "character" && message.message.speech) {
-        console.log(
-          "Posting audio URL to Uneeq...",
-          message.message.speech.audio,
-        );
-        // fetch("https://api.us.uneeq.io/api/v1/custom/charisma/pushWav", {
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     uneeqSessionId: sessionId,
-        //     wavURL: message.message.speech.audio,
-        //   }),
-        // });
+        fetch(
+          "https://charisma-uneeq-orchestration.herokuapp.com/api/v1/custom/charisma/pushWav",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              uneeqSessionId: sessionId,
+              wavURL: message.message.speech.audio,
+              instructions: { displayHtml: { html: "" } },
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        ).catch((err) => {
+          console.error(err);
+        });
       }
     });
     setConversation(newConversation);
@@ -84,21 +93,25 @@ const Player = () => {
         } else if (message.uneeqMessageType !== "WebRtcData") {
           console.log("UNEEQ MESSAGE:");
           console.log(message);
+
+          if (message.uneeqMessageType === "StartedSpeaking") {
+            setIsSpeaking(true);
+          } else if (message.uneeqMessageType === "FinishedSpeaking") {
+            setIsSpeaking(false);
+          }
         }
       },
     });
   };
 
-  const [isListening, setIsListening] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-
-  const { clientState, start, stop, segment } = useSpeechContext();
+  const { clientState, startContext, stopContext, segment } =
+    useSpeechContext();
 
   useEffect(() => {
     if (isListening && !isSpeaking) {
-      start();
+      startContext().catch(() => setIsListening(false));
     } else {
-      stop().catch(() => {
+      stopContext().catch(() => {
         // this is likely to be because it wasn't started!
       });
     }
@@ -211,7 +224,7 @@ const Player = () => {
             type="button"
             id="mic"
             className={classNames({
-              on: clientState === DecoderState.Active,
+              on: clientState === ClientState.Recording,
               paused: isListening && isSpeaking,
             })}
             onClick={() => setIsListening(!isListening)}
