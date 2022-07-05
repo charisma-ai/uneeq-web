@@ -17,7 +17,7 @@ const App = ({ Component, pageProps }: AppProps) => (
       />
     </Head>
     <DefaultSeo
-      title="Charisma x Uneeq — Ultimate digital humans"
+      title="Charisma x UneeQ — Ultimate digital humans"
       description="Interactive digital humans with the best in conversational technology."
       openGraph={{
         images: [
@@ -25,7 +25,7 @@ const App = ({ Component, pageProps }: AppProps) => (
             url: "https://uneeq-web.vercel.app/static/og.png",
             width: 1200,
             height: 630,
-            alt: "Logos for Charisma and Uneeq.",
+            alt: "Logos for Charisma and UneeQ.",
             type: "image/png",
           },
         ],

@@ -158,7 +158,7 @@ const Player = () => {
           border: "1px solid rgb(61 58 58)",
           borderRadius: !isUneeqLoaded ? 6 : 0,
           overflow: "hidden",
-          backgroundImage: "url('/static/digital-human.png')",
+          backgroundImage: "url('/static/digital-human-2.png')",
           backgroundSize: "cover",
           backgroundPosition: "50% 50%",
           boxShadow: "0 0 4px black",
@@ -177,7 +177,7 @@ const Player = () => {
               pointerEvents: !isUneeqLoaded ? "all" : "none",
             }}
           >
-            <h1 className="gradient-text">Charisma x Uneeq</h1>
+            <h1 className="gradient-text">Charisma x UneeQ</h1>
             <h2 style={{ textAlign: "center" }}>
               The ultimate conversational digital human
             </h2>
