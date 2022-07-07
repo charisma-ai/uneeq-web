@@ -13,7 +13,6 @@ import createUneeqPlayer from "../lib/uneeq";
 import Spinner from "./Spinner";
 
 const STORY_ID = 5507;
-const API_KEY = "42ce9f0c-9039-41cf-a9b8-5f03d9a49087";
 
 const Player = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,8 +36,6 @@ const Player = () => {
 
     const initialPlaythroughToken = await createPlaythroughToken({
       storyId: STORY_ID,
-      version: -1,
-      apiKey: API_KEY,
     });
     const initialConversationId = await createConversation(
       initialPlaythroughToken,
